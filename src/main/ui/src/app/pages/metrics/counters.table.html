@@ -1,0 +1,19 @@
+{{counters.length}} counters
+<table class="table table-striped table-bordered table-hover table-sm">
+  <thead>
+  <tr>
+    <th>Source</th>
+    <th>Name</th>
+    <th>Hosts</th>
+    <th>Count</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let counter of counters">
+    <td>{{counter.registry}}</td>
+    <td>{{counter.name}}</td>
+    <td>{{counter.hosts.length}}</td>
+    <td>{{counter.metric.count | number: '.0'}}</td>
+  </tr>
+  </tbody>
+</table>

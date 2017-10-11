@@ -1,0 +1,204 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.6.RELEASE</version>
+        <relativePath />
+    </parent>
+
+    <groupId>net.javalib</groupId>
+    <artifactId>isb-man</artifactId>
+    <version>2.0.0-alpha-1</version>
+    <packaging>jar</packaging>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>ISB Manager</description>
+    <url>https://github.com/haninaguib/isb-man</url>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Hani Naguib</name>
+            <email>haninaguib@javalib.com</email>
+            <organization>JavaLib.Net</organization>
+            <organizationUrl>https://github.com/haninaguib</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/haninaguib/isb.git</connection>
+        <developerConnection>scm:git:ssh://github.com:haninaguib/isb-man.git</developerConnection>
+        <url>http://github.com/haninaguib/isb/tree/master</url>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>bintray-haninaguib-net.javalib</id>
+            <name>haninaguib-net.javalib</name>
+            <url>https://api.bintray.com/maven/haninaguib/net.javalib/isb-man/;publish=1</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <metrics-spring.version>3.1.3</metrics-spring.version>
+        <swagger-springmvc.version>1.0.0</swagger-springmvc.version>
+
+        <start-class>net.javalib.isb.man.ISBManApp</start-class>
+
+    </properties>
+
+    <dependencies>
+        <!-- SPRING -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.javalib</groupId>
+            <artifactId>isb</artifactId>
+            <version>2.0.0-alpha-4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <finalName>isb-man</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>exec-maven-plugin</artifactId>-->
+                <!--<executions>-->
+
+                    <!--<execution>-->
+                        <!--<id>exec-npm-install</id>-->
+                        <!--<phase>generate-sources</phase>-->
+                        <!--<configuration>-->
+                            <!--<workingDirectory>${project.basedir}/src/main/ui</workingDirectory>-->
+                            <!--<executable>npm</executable>-->
+                            <!--<arguments>-->
+                                <!--<argument>install</argument>-->
+                            <!--</arguments>-->
+                        <!--</configuration>-->
+                        <!--<goals>-->
+                            <!--<goal>exec</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+
+                    <!--<execution>-->
+                        <!--<id>install-ng</id>-->
+                        <!--<phase>generate-sources</phase>-->
+                        <!--<configuration>-->
+                            <!--<workingDirectory>${project.basedir}/src/main/ui</workingDirectory>-->
+                            <!--<executable>npm</executable>-->
+                            <!--<arguments>-->
+                                <!--<argument>install</argument>-->
+                                <!--<argument>@angular/cli</argument>-->
+                                <!--<argument>-g</argument>-->
+                            <!--</arguments>-->
+                        <!--</configuration>-->
+                        <!--<goals>-->
+                            <!--<goal>exec</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+
+                    <!--<execution>-->
+                        <!--<id>exec-ng-build</id>-->
+                        <!--<phase>generate-sources</phase>-->
+                        <!--<configuration>-->
+                            <!--<workingDirectory>${project.basedir}/src/main/ui</workingDirectory>-->
+                            <!--<executable>ng</executable>-->
+                            <!--<arguments>-->
+                                <!--<argument>build</argument>-->
+                                <!--<argument>-prod</argument>-->
+                                <!--<argument>&#45;&#45;base-href</argument>-->
+                                <!--<argument>/manage/</argument>-->
+                                <!--<argument>-op</argument>-->
+                                <!--<argument>../resources/isb-ui</argument>-->
+                            <!--</arguments>-->
+                        <!--</configuration>-->
+                        <!--<goals>-->
+                            <!--<goal>exec</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+
+
+                <!--</executions>-->
+            <!--</plugin>-->
+
+        </plugins>
+
+    </build>
+
+</project>

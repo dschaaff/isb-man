@@ -1,0 +1,26 @@
+<ngb-tabset>
+  <ngb-tab title="Timers">
+    <ng-template ngbTabContent>
+      <br/>
+      <timers-table [timers]="metrics.timers"></timers-table>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Counters">
+    <ng-template ngbTabContent>
+      <br/>
+      <counters-table [counters]="metrics.counters"></counters-table>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Gauges">
+    <ng-template ngbTabContent>
+      <br/>
+      <gauges-table [gauges]="metrics.gauges"></gauges-table>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Meters">
+    <ng-template ngbTabContent>
+      <br/>
+      <meters-table [meters]="metrics.meters"></meters-table>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">ISB Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="env" ngbDropdownToggle>{{state.env}}</button>
+          <div ngbDropdownMenu aria-labelledby="env">
+            <button *ngFor="let env of state.envs" (click)="state.setEnv(env)" class="dropdown-item">{{env}}</button>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        &nbsp;
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="server" ngbDropdownToggle>{{serviceName()}}</button>
+          <div ngbDropdownMenu aria-labelledby="server">
+            <button (click)="state.setService(null)" class="dropdown-item">All</button>
+            <button *ngFor="let service of state.services" (click)="state.setService(service)" class="dropdown-item">{{service}}</button>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        &nbsp;
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="hostname" ngbDropdownToggle>{{hostName()}}</button>
+          <div ngbDropdownMenu aria-labelledby="hostname">
+            <button (click)="state.setHostname(null)" class="dropdown-item">All</button>
+            <button *ngFor="let hostname of state.hostnames" (click)="state.setHostname(hostname)" class="dropdown-item">{{hostname}}</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
