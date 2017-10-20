@@ -1,0 +1,26 @@
+<tabset>
+  <tab heading="Timers [{{metrics.timers.length}}]">
+    <div ngbTabContent>
+      <br/>
+      <timers-table [timers]="metrics.timers"></timers-table>
+    </div>
+  </tab>
+  <tab heading="Counters [{{metrics.counters.length}}]">
+    <div ngbTabContent>
+      <br/>
+      <counters-table [counters]="metrics.counters"></counters-table>
+    </div>
+  </tab>
+  <tab heading="Gauges [{{metrics.gauges.length}}]">
+    <div ngbTabContent>
+      <br/>
+      <gauges-table [gauges]="metrics.gauges"></gauges-table>
+    </div>
+  </tab>
+  <tab heading="Meters [{{metrics.meters.length}}]">
+    <div ngbTabContent>
+      <br/>
+      <meters-table [meters]="metrics.meters"></meters-table>
+    </div>
+  </tab>
+</tabset>

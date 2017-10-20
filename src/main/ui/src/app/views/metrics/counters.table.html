@@ -1,0 +1,17 @@
+<dtable
+  [title]="'Counters'"
+  [columns]="[
+    { title: 'Source', filterable: true, property: 'registry'},
+    { title: 'Name', filterable: true, property: 'name'},
+    { title: 'Hosts'},
+    { title: 'Count'}
+  ]"
+  [data]="counters"
+  [template]="rows">
+  <ng-template #rows let-counter="row">
+    <td>{{counter.registry}}</td>
+    <td>{{counter.name}}</td>
+    <td>{{counter.hosts.length}}</td>
+    <td>{{counter.metric.count | number: '.0'}}</td>
+  </ng-template>
+</dtable>

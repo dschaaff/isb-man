@@ -1,0 +1,19 @@
+<dtable
+  [title]="'Meters'"
+  [columns]="[
+    { title: 'Source', filterable: true, property: 'registry'},
+    { title: 'Name', filterable: true, property: 'name'},
+    { title: 'Hosts'},
+    { title: 'Count'},
+    { title: 'req/sec'}
+  ]"
+  [data]="meters"
+  [template]="rows">
+  <ng-template #rows let-gauge="row">
+    <td>{{meter.registry}}</td>
+    <td>{{meter.name}}</td>
+    <td>{{meter.hosts.length}}</td>
+    <td>{{meter.metric.count | number: '.0'}}</td>
+    <td>{{meter.metric.oneMinuteRate | number: '.2-2'}}</td>
+  </ng-template>
+</dtable>

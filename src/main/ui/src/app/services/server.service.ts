@@ -25,6 +25,12 @@ export class ServerService {
     return this.http.get(this.getMetricsURL(state)).map(res => res.json());
   }
 
+  getEnvUrl(server): string { return "/api/servers/" + server.address + '/' + server.managePort + '/env'; }
+  getEnv(server): Observable<any> {
+    return this.http.get(this.getEnvUrl(server)).map(res => res.json());
+  }
+
+
   private enc(value) {
     if (value == null) {
       return '';

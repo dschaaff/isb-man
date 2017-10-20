@@ -36,7 +36,6 @@ export class StateService {
   }
 
   setHostname(hostname: string) {
-    console.log("set hostname: "+hostname);
     this.hostname = hostname;
     this.serversUpdate();
   }

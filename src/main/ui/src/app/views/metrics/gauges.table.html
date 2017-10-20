@@ -1,0 +1,17 @@
+<dtable
+  [title]="'Gauges'"
+  [columns]="[
+    { title: 'Source', filterable: true, property: 'registry'},
+    { title: 'Name', filterable: true, property: 'name'},
+    { title: 'Hosts'},
+    { title: 'Count', filterable: true, property: 'metric.value'}
+  ]"
+  [data]="gauges"
+  [template]="rows">
+  <ng-template #rows let-gauge="row">
+    <td>{{gauge.registry}}</td>
+    <td>{{gauge.name}}</td>
+    <td>{{gauge.hosts.length}}</td>
+    <td>{{gauge.metric.value}}</td>
+  </ng-template>
+</dtable>

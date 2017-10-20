@@ -1,0 +1,25 @@
+<dtable
+  [title]="'Timers'"
+  [columns]="[
+    { title: 'Source', filterable: true, property: 'registry'},
+    { title: 'Name', filterable: true, property: 'name'},
+    { title: 'Hosts'},
+    { title: 'Count'},
+    { title: 'Avg(ms)'},
+    { title: 'Max(ms)'},
+    { title: 'req/sec'},
+    { title: 'Total(secs)'}
+  ]"
+  [data]="timers"
+  [template]="rows">
+  <ng-template #rows let-timer="row">
+    <td>{{timer.registry}}</td>
+    <td>{{timer.name}}</td>
+    <td>{{timer.hosts.length}}</td>
+    <td>{{timer.metric.count | number: '.0'}}</td>
+    <td>{{timer.metric.snapshot.mean/1000000 | number: '.2-2'}}</td>
+    <td>{{timer.metric.snapshot.max/1000000 | number: '.2-2'}}</td>
+    <td>{{timer.metric.oneMinuteRate | number: '.2-2'}}</td>
+    <td>{{timer.total_time | number: '.2-2'}}</td>
+  </ng-template>
+</dtable>
