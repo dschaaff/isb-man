@@ -19,7 +19,10 @@
     <td>
       <a href="#" (click)="copySSH(server)" ngxClipboard [cbContent]="'ssh '+server.address">SSH</a>
       |
-      JMX | Trace | Threads |
+      JMX
+      |
+      <a href="#" (click)="showTrace(server)">Trace</a>
+      | Threads |
       <a href="#" (click)="showEnv(server)">Env</a>
       | Swagger </td>
   </ng-template>

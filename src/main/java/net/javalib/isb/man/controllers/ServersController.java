@@ -29,4 +29,9 @@ public class ServersController {
         return restTemplate.getForObject("http://"+address+":"+port+"/manage/env",JsonNode.class);
     }
 
+    @RequestMapping(value = "/servers/{address}/{port}/trace", method = RequestMethod.GET)
+    public JsonNode getTrace(@PathVariable String address, @PathVariable int port) {
+        return restTemplate.getForObject("http://"+address+":"+port+"/manage/trace",JsonNode.class);
+    }
+
 }

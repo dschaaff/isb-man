@@ -6,6 +6,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import {EnvModal} from "./env.modal";
 import {EnvsUtils} from "../../utils/envs.utils";
+import {TraceModal} from "./trace.modal";
 
 @Component({
   templateUrl: './servers.page.html'
@@ -36,6 +37,15 @@ export class ServersPage {
     });
 
     this.bsModalRef =this.modalService.show(EnvModal, {class: 'modal-lg'} );
+    this.bsModalRef.content.server = selectedServer;
+  }
+
+  showTrace(selectedServer) {
+    this.server.getTrace(selectedServer).subscribe( trace => {
+      this.bsModalRef.content.trace = trace;
+    });
+
+    this.bsModalRef =this.modalService.show(TraceModal, {class: 'modal-lg'} );
     this.bsModalRef.content.server = selectedServer;
   }
 

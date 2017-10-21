@@ -30,6 +30,11 @@ export class ServerService {
     return this.http.get(this.getEnvUrl(server)).map(res => res.json());
   }
 
+  getTraceUrl(server): string { return "/api/servers/" + server.address + '/' + server.managePort + '/trace'; }
+  getTrace(server): Observable<any> {
+    return this.http.get(this.getTraceUrl(server)).map(res => res.json());
+  }
+
 
   private enc(value) {
     if (value == null) {

@@ -66,11 +66,13 @@ import {TimersTable} from "./views/metrics/timers.table";
 import {MetricsTab} from "./views/metrics/metrics.tab";
 import {ToastModule} from "ng2-toastr/ng2-toastr";
 import { ClipboardModule } from 'ngx-clipboard';
-import {HttpModule, JsonpModule} from '@angular/http';
+import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DTable} from "./components/dtable/dtable";
 import { FormsModule } from '@angular/forms';
 import {EnvModal} from "./views/servers/env.modal";
+import {TraceModal} from "./views/servers/trace.modal";
+import {TraceDetailsModal} from "./views/servers/trace.details.modal";
 
 @NgModule({
   imports: [
@@ -81,18 +83,18 @@ import {EnvModal} from "./views/servers/env.modal";
     TabsModule.forRoot(),
     ChartsModule,
     ClipboardModule, ToastModule.forRoot(),
-    HttpModule, JsonpModule
+    HttpModule
   ],
   declarations: [
     AppComponent,
-    ServersPage,EnvModal,
+    ServersPage,EnvModal,TraceModal,TraceDetailsModal,
     MetricsPage,MetricsTab, TimersTable, CountersTable, GaugesTable, MetersTable,
     DTable,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES
   ],
-  entryComponents: [EnvModal],
+  entryComponents: [EnvModal,TraceModal, TraceDetailsModal],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
