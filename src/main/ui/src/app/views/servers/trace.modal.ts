@@ -7,7 +7,7 @@ import {TraceDetailsModal} from "./trace.details.modal";
   template: `
     <div class="modal-header">
       <h4 class="modal-title pull-left">{{server.hostname}}</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -32,19 +32,20 @@ import {TraceDetailsModal} from "./trace.details.modal";
       </dtable>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+      <button type="button" class="btn btn-default" (click)="modal.hide()">Close</button>
     </div>  `
 })
 export class TraceModal {
   public server = {hostname:""};
   public trace = [];
+  modal;
 
   constructor( private modalService: BsModalService) {}
 
   openTraceDetails(trace) {
     console.log(JSON.stringify(trace.info));
-    let modal = this.modalService.show(TraceDetailsModal, {class: 'modal-lg'});
-    modal.content.trace = trace;
+    this.modal = this.modalService.show(TraceDetailsModal, {class: 'modal-lg'});
+    this.modal.content.trace = trace;
   }
 
 }

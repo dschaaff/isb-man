@@ -35,6 +35,11 @@ export class ServerService {
     return this.http.get(this.getTraceUrl(server)).map(res => res.json());
   }
 
+  getThreadsUrl(server): string { return "/api/servers/"+server.address+"/"+server.managePort+"/threads";}
+  getThreads(server) : Observable<any> {
+    return this.http.get(this.getThreadsUrl(server)).map(res => res.json());
+  }
+
 
   private enc(value) {
     if (value == null) {

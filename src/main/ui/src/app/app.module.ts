@@ -73,6 +73,8 @@ import { FormsModule } from '@angular/forms';
 import {EnvModal} from "./views/servers/env.modal";
 import {TraceModal} from "./views/servers/trace.modal";
 import {TraceDetailsModal} from "./views/servers/trace.details.modal";
+import {ThreadsModal} from "./views/servers/threads.modal";
+import {ThreadDetailsModal} from "./views/servers/thread.details.modal";
 
 @NgModule({
   imports: [
@@ -87,14 +89,14 @@ import {TraceDetailsModal} from "./views/servers/trace.details.modal";
   ],
   declarations: [
     AppComponent,
-    ServersPage,EnvModal,TraceModal,TraceDetailsModal,
+    ServersPage,EnvModal,TraceModal,TraceDetailsModal,ThreadsModal,ThreadDetailsModal,
     MetricsPage,MetricsTab, TimersTable, CountersTable, GaugesTable, MetersTable,
     DTable,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
     ...APP_DIRECTIVES
   ],
-  entryComponents: [EnvModal,TraceModal, TraceDetailsModal],
+  entryComponents: [EnvModal,TraceModal, TraceDetailsModal, ThreadsModal, ThreadDetailsModal],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy

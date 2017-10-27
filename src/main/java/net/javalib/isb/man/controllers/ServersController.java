@@ -34,4 +34,9 @@ public class ServersController {
         return restTemplate.getForObject("http://"+address+":"+port+"/manage/trace",JsonNode.class);
     }
 
+    @RequestMapping(value = "/servers/{address}/{port}/threads", method = RequestMethod.GET)
+    public Object getThreads(@PathVariable String address, @PathVariable int port) {
+        return restTemplate.getForObject("http://"+address+":"+port+"/manage/dump",Object.class);
+    }
+
 }

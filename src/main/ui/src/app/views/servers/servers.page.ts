@@ -7,6 +7,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import {EnvModal} from "./env.modal";
 import {EnvsUtils} from "../../utils/envs.utils";
 import {TraceModal} from "./trace.modal";
+import {ThreadsModal} from "./threads.modal";
 
 @Component({
   templateUrl: './servers.page.html'
@@ -48,5 +49,15 @@ export class ServersPage {
     this.bsModalRef =this.modalService.show(TraceModal, {class: 'modal-lg'} );
     this.bsModalRef.content.server = selectedServer;
   }
+
+  showThreads(selectedServer) {
+    this.server.getThreads(selectedServer).subscribe( threads => {
+      this.bsModalRef = this.bsModalRef.content.threads = threads;
+    });
+    this.bsModalRef =this.modalService.show(ThreadsModal, {class: 'modal-lg'} );
+    this.bsModalRef.content.server = selectedServer;
+  }
+
+
 
 }
