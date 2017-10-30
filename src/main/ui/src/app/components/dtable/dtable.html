@@ -1,24 +1,22 @@
 <div class="card">
-  <div *ngIf="title != null || hasFilters()" class="card-header">
+  <div *ngIf="title != null || hasFilters()" class="card-header" data-background-color="purple">
     <i class="fa fa-align-justify"></i> {{title}}
     <ng-container *ngIf="hasFilters()">[{{filtered.length}}/{{data.length}}]</ng-container>
-    <label *ngIf="hasFilters()" class="switch switch-sm switch-text switch-info float-right mb-0">
-      <input type="checkbox" class="switch-input" (click)="toggleFilter()">
-      <span class="switch-label" data-on="On" data-off="Off"></span>
-      <span class="switch-handle"></span>
-    </label>
   </div>
   <div class="card-body">
     <table class="table table-sm table-hover table-striped">
       <thead>
       <tr>
-        <th *ngFor="let column of columns">{{column.title}}</th>
+        <th *ngFor="let column of columns">
+          <div *ngIf="column.filterable"  class="form-group label-floating is-empty">
+            <label class="control-label">{{column.title}}</label>
+            <input [(ngModel)]="filters[column.property]" (keydown)="filterItems()" class="form-control form-control-sm">
+          </div>
+          <span *ngIf="!column.filterable">
+            {{column.title}}
+          </span>
+        </th>
       </tr>
-      <ng-container *ngIf="filtersVisible">
-          <th *ngFor="let column of columns">
-            <input *ngIf="column.filterable" [(ngModel)]="filters[column.property]" (keydown)="filterItems()" class="form-control form-control-sm">
-          </th>
-      </ng-container>
       </thead>
       <tbody>
       <tr *ngFor="let row of filtered">

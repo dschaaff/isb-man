@@ -14,10 +14,10 @@ import {ThreadsModal} from "./threads.modal";
 })
 export class ServersPage {
   public filterVisible=false;
-  bsModalRef: BsModalRef;
+  modal: BsModalRef;
 
   constructor(public state: StateService, public server: ServerService,
-              private toastr: ToastsManager, vcr: ViewContainerRef, private modalService: BsModalService) {
+              private toastr: ToastsManager, vcr: ViewContainerRef, private bsModalRef: BsModalService) {
     this.toastr.setRootViewContainerRef(vcr);
 
   }
@@ -34,28 +34,31 @@ export class ServersPage {
 
   showEnv(selectedServer) {
     this.server.getEnv(selectedServer).subscribe( envs => {
-      this.bsModalRef.content.envs = EnvsUtils.toArray(envs);
+      this.modal.content.envs = EnvsUtils.toArray(envs);
     });
 
-    this.bsModalRef =this.modalService.show(EnvModal, {class: 'modal-lg'} );
-    this.bsModalRef.content.server = selectedServer;
+    this.modal =this.bsModalRef.show(EnvModal);
+    this.modal.content.server = selectedServer;
+    return false;
   }
 
   showTrace(selectedServer) {
     this.server.getTrace(selectedServer).subscribe( trace => {
-      this.bsModalRef.content.trace = trace;
+      this.modal.content.trace = trace;
     });
 
-    this.bsModalRef =this.modalService.show(TraceModal, {class: 'modal-lg'} );
-    this.bsModalRef.content.server = selectedServer;
+    this.modal =this.bsModalRef.show(TraceModal);
+    this.modal.content.server = selectedServer;
+    return false;
   }
 
   showThreads(selectedServer) {
+    this.modal =this.bsModalRef.show(ThreadsModal);
+    this.modal.content.server = selectedServer;
     this.server.getThreads(selectedServer).subscribe( threads => {
-      this.bsModalRef = this.bsModalRef.content.threads = threads;
+      this.modal.content.threads = threads;
     });
-    this.bsModalRef =this.modalService.show(ThreadsModal, {class: 'modal-lg'} );
-    this.bsModalRef.content.server = selectedServer;
+    return false;
   }
 
 

@@ -1,4 +1,4 @@
-<div class="float-right"><a [href]="server.getServersURL()" target="source">Source</a></div>
+<div class="pull-right"><a [href]="server.getServersURL()" target="source">Source</a></div>
 <br/>
 <dtable
   [title]="'Servers in '+(state.env | uppercase)"
@@ -19,13 +19,15 @@
     <td>
       <a href="#" (click)="copySSH(server)" ngxClipboard [cbContent]="'ssh '+server.address">SSH</a>
       |
-      JMX
+        JMX
       |
       <a href="#" (click)="showTrace(server)">Trace</a>
       |
       <a href="#" (click)="showThreads(server)">Threads</a>
       |
       <a href="#" (click)="showEnv(server)">Env</a>
-      | Swagger </td>
+      |
+      <a href="http://{{server.address}}:{{server.port}}/swagger/index.html" target="{{server.hostname}}-swagger">Swagger</a>
+    </td>
   </ng-template>
 </dtable>

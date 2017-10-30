@@ -35,8 +35,8 @@ public class InfluxDBServiceImpl implements InfluxDBService {
     @Override
     @Timed
     public void store(String db, List<Point> points) {
-        logger.info("storing {} points in {}",points.size(),influxDbUrl+"/"+db);
         String dbUrl = dbUrl(db);
+        logger.info("storing {} points in {}",points.size(),dbUrl);
         List<List<Point>> partitions = CollectionUtils.partition(points, 1000);
         for (List<Point> partition : partitions) {
             try {

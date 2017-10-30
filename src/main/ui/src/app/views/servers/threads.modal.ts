@@ -3,16 +3,18 @@ import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import {TraceDetailsModal} from "./trace.details.modal";
 import {ThreadDetailsModal} from "./thread.details.modal";
+import {ServerService} from "../../services/server.service";
 
 @Component({
   template: `
     <div class="modal-header">
       <h4 class="modal-title pull-left">{{server?.hostname}}</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide(1)">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
+      <div *ngIf="server != null" class="pull-right"><a [href]="serverService.getThreadsUrl(server)" target="source">Source</a></div>
       <dtable 
         [title]="'Trace'"
         [columns]="[
@@ -39,19 +41,20 @@ import {ThreadDetailsModal} from "./thread.details.modal";
       </dtable>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-default" (click)="modal.hide()">Close</button>
+      <button type="button" class="btn btn-default" (click)="bsModalRef.hide(1)">Close</button>
     </div>  `
 })
 export class ThreadsModal {
-  public server;
+  public server = null;
   public threads = [];
   modal;
 
-  constructor( private modalService: BsModalService) {}
+  constructor( public bsModalRef: BsModalService, public serverService: ServerService) {}
 
   displayThread(thread) {
-    this.modal = this.modalService.show(ThreadDetailsModal, {class: 'modal-lg'});
+    this.modal = this.bsModalRef.show(ThreadDetailsModal, {class: 'modal-lg'});
     this.modal.content.thread = thread;
+    return false;
   }
 
 }

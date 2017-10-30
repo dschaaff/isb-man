@@ -11,6 +11,7 @@ export class AppHeaderComponent {
   setEnv(env) {
     this.state.setEnv(env);
     this.state.setHostname(null);
+    return false;
   }
 
   serviceName() {
@@ -24,6 +25,7 @@ export class AppHeaderComponent {
   setService(service) {
     this.state.setService(service);
     this.state.setHostname(null);
+    return false;
   }
 
   hostName() {
@@ -36,6 +38,7 @@ export class AppHeaderComponent {
 
   setHostname(hostname) {
     this.state.setHostname(hostname);
+    return false;
   }
 
 }

@@ -1,20 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-</head>
-<body>
-  <topbar></topbar>
-  <br/>
-  <div class="container-fluid">
-    <div class="row">
-      <sidenav></sidenav>
-      <div class="col">
-        <router-outlet></router-outlet>
+<div class="wrapper">
+  <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
+
+    <div class="logo">
+      <a href="http://www.creative-tim.com" class="simple-text">
+        ISB Manager
+      </a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]="['/ui/servers']">
+            <i class="material-icons">laptop</i>
+            <p>Servers</p>
+          </a>
+        </li>
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]="['/ui/metrics']">
+            <i class="material-icons">assessment</i>
+            <p>Metrics</p>
+          </a>
+        </li>
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]="['/ui/datasources']">
+            <i class="material-icons">dns</i>
+            <p>DataSources</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="main-panel">
+    <nav class="navbar navbar-primary navbar-absolute">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse">
+          <app-header></app-header>
+        </div>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</body>
-</html>
+</div>
 

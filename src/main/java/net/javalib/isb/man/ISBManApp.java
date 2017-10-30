@@ -13,5 +13,4 @@ public class ISBManApp {
     public static void main(String[] args) {
         SpringApplication.run(ISBManApp.class);
     }
-
 }

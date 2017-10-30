@@ -1,44 +1,44 @@
-<header class="app-header navbar">
-  <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>
-    <span class="navbar-toggler-icon"></span>
-  </button>
-    <!-- <a class="navbar-brand" href="#"></a> -->
-  <button class="navbar-toggler d-md-down-none" type="button" appSidebarToggler>
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <span style="width: 155px; padding: 0.5rem 1rem;">ISB MANAGER</span>
   <ul class="nav navbar-nav d-md-down-none">
       <li class="nav-item dropdown px-3" dropdown placement="bottom right">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-            <span class="d-md-down-none">{{state.env | uppercase }}</span>
+            {{state.env | uppercase }}
+            <span class="caret"></span>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+          <ul class="dropdown-menu dropdown-menu-left" *dropdownMenu aria-labelledby="simple-dropdown">
             <div class="dropdown-header text-center"><strong>CLUSTER</strong></div>
-            <a *ngFor="let env of state.envs" (click)="setEnv(env)" class="dropdown-item" href="#">{{env}}</a>
-          </div>
+            <li *ngFor="let env of state.envs" (click)="setEnv(env)">
+              <a>{{env}}</a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item dropdown px-3" dropdown placement="bottom right">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-              <span class="d-md-down-none">{{serviceName() | uppercase}}</span>
+              {{serviceName() | uppercase}}
+              <span class="caret"></span>
             </a>
-            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+            <ul class="dropdown-menu dropdown-menu-left" *dropdownMenu aria-labelledby="simple-dropdown">
               <div class="dropdown-header text-center"><strong>Service Type</strong></div>
-              <a (click)="setService(null)" class="dropdown-item" href="#">All</a>
-              <a *ngFor="let service of state.services" (click)="setService(service)" class="dropdown-item" href="#">{{service}}</a>
-            </div>
+              <li>
+                <a (click)="setService(null)" class="dropdown-item">All</a>
+              </li>
+              <li *ngFor="let service of state.services" (click)="setService(service)">
+                <a class="dropdown-item" href="#">{{service}}</a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item dropdown px-3" dropdown placement="bottom right">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-                <span class="d-md-down-none">{{hostName() | uppercase}}</span>
+                {{hostName() | uppercase}}
+                <span class="caret"></span>
               </a>
-              <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+              <ul class="dropdown-menu dropdown-menu-left" *dropdownMenu aria-labelledby="simple-dropdown">
                 <div class="dropdown-header text-center"><strong>Host</strong></div>
-                <a (click)="setHostname(null)" class="dropdown-item" href="#">All</a>
-                <a *ngFor="let hostname of state.hostnames" (click)="setHostname(hostname)" class="dropdown-item" href="#">{{hostname}}</a>
-              </div>
+                <li>
+                  <a (click)="setHostname(null)" class="dropdown-item" href="#">All</a>
+                </li>
+                <li *ngFor="let hostname of state.hostnames" (click)="setHostname(hostname)">
+                    <a class="dropdown-item" href="#">{{hostname}}</a>
+                </li>
+              </ul>
             </li>
   </ul>
-
-  <ul class="nav navbar-nav ml-auto">
-  </ul>
-</header>

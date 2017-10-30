@@ -20,24 +20,24 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class HttpConfig {
 
-    @Bean
-    public ObjectMapper objectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        mapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
-        return mapper;
-    }
+//    @Bean
+//    public ObjectMapper objectMapper() {
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+//        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//        mapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
+//        return mapper;
+//    }
 
     @Bean
     public RestTemplate restTemplate() {
         RestTemplate template = new RestTemplate();
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-        MappingJackson2HttpMessageConverter jsonMessageConverter = new MappingJackson2HttpMessageConverter();
-        jsonMessageConverter.setObjectMapper(objectMapper());
-        messageConverters.add(jsonMessageConverter);
-        template.setMessageConverters(messageConverters);
+//        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+//        MappingJackson2HttpMessageConverter jsonMessageConverter = new MappingJackson2HttpMessageConverter();
+//        jsonMessageConverter.setObjectMapper(objectMapper());
+//        messageConverters.add(jsonMessageConverter);
+//        template.setMessageConverters(messageConverters);
         template.setRequestFactory(clientHttpRequestFactory());
         return template;
     }
