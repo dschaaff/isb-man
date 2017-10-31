@@ -16,13 +16,19 @@ export class StateService {
 
   _servers: any[] = [];
   servers: any[] = [];
+  config : any = {};
 
   constructor(private server: ServerService) {
-    this.server.getServers().subscribe(
-      servers => {
-        this.setServers(servers);
+    this.server.getConfig().subscribe(
+      config => {
+        this.config = config;
+        this.server.getServers().subscribe(
+          servers => {
+            this.setServers(servers);
+          }
+        );
       }
-    );
+    )
   }
 
   setEnv(env: string) {

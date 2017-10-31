@@ -28,24 +28,10 @@ public class Point {
     Point() {
     }
 
-    /**
-     * Create a new Point Build build to create a new Point in a fluent manner-
-     *
-     * @param measurement
-     *            the name of the measurement.
-     * @return the Builder to be able to add further Builder calls.
-     */
-
     public static Builder measurement(final String measurement) {
         return new Builder(measurement);
     }
 
-    /**
-     * Builder for a new Point.
-     *
-     * @author stefan.majer [at] gmail.com
-     *
-     */
     public static final class Builder {
         private final String measurement;
         private final Map<String, String> tags = Maps.newTreeMap(Ordering.natural());
@@ -53,22 +39,10 @@ public class Point {
         private TimeUnit precision = TimeUnit.NANOSECONDS;
         private final Map<String, Object> fields = Maps.newTreeMap(Ordering.natural());
 
-        /**
-         * @param measurement
-         */
         Builder(final String measurement) {
             this.measurement = measurement;
         }
 
-        /**
-         * Add a tag to this point.
-         *
-         * @param tagName
-         *            the tag name
-         * @param value
-         *            the tag value
-         * @return the Builder instance.
-         */
         public Builder tag(final String tagName, final String value) {
             Preconditions.checkArgument(tagName != null);
             Preconditions.checkArgument(value != null);
@@ -76,50 +50,10 @@ public class Point {
             return this;
         }
 
-        /**
-         * Add a Map of tags to add to this point.
-         *
-         * @param tagsToAdd
-         *            the Map of tags to add
-         * @return the Builder instance.
-         */
         public Builder tag(final Map<String, String> tagsToAdd) {
             for (Entry<String, String> tag : tagsToAdd.entrySet()) {
                 tag(tag.getKey(), tag.getValue());
             }
-            return this;
-        }
-
-        /**
-         * Add a field to this point.
-         *
-         * @param field
-         *            the field name
-         * @param value
-         *            the value of this field
-         * @return the Builder instance.
-         */
-        @Deprecated
-        public Builder field(final String field, Object value) {
-            if (value instanceof Number) {
-                if (value instanceof Byte) {
-                    value = ((Byte) value).doubleValue();
-                }
-                if (value instanceof Short) {
-                    value = ((Short) value).doubleValue();
-                }
-                if (value instanceof Integer) {
-                    value = ((Integer) value).doubleValue();
-                }
-                if (value instanceof Long) {
-                    value = ((Long) value).doubleValue();
-                }
-                if (value instanceof BigInteger) {
-                    value = ((BigInteger) value).doubleValue();
-                }
-
-            }
-            fields.put(field, value);
             return this;
         }
 
@@ -152,25 +86,11 @@ public class Point {
             return this;
         }
 
-        /**
-         * Add a Map of fields to this point.
-         *
-         * @param fieldsToAdd
-         *            the fields to add
-         * @return the Builder instance.
-         */
         public Builder fields(final Map<String, Object> fieldsToAdd) {
             this.fields.putAll(fieldsToAdd);
             return this;
         }
 
-        /**
-         * Add a time to this point
-         *
-         * @param precisionToSet
-         * @param timeToSet
-         * @return the Builder instance.
-         */
         public Builder time(final long timeToSet, final TimeUnit precisionToSet) {
             Preconditions.checkNotNull(precisionToSet, "Precision must be not null!");
             this.time = timeToSet;
@@ -178,11 +98,6 @@ public class Point {
             return this;
         }
 
-        /**
-         * Create a new Point.
-         *
-         * @return the newly created Point.
-         */
         public Point build() {
             Preconditions
                     .checkArgument(!Strings.isNullOrEmpty(this.measurement), "Point name must not be null or empty.");
@@ -202,56 +117,30 @@ public class Point {
         }
     }
 
-    /**
-     * @param measurement
-     *            the measurement to set
-     */
     void setMeasurement(final String measurement) {
         this.measurement = measurement;
     }
 
-    /**
-     * @param time
-     *            the time to set
-     */
     void setTime(final Long time) {
         this.time = time;
     }
 
-    /**
-     * @param tags
-     *            the tags to set
-     */
     void setTags(final Map<String, String> tags) {
         this.tags = tags;
     }
 
-    /**
-     * @return the tags
-     */
     Map<String, String> getTags() {
         return this.tags;
     }
 
-    /**
-     * @param precision
-     *            the precision to set
-     */
     void setPrecision(final TimeUnit precision) {
         this.precision = precision;
     }
 
-    /**
-     * @param fields
-     *            the fields to set
-     */
     void setFields(final Map<String, Object> fields) {
         this.fields = fields;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -269,15 +158,6 @@ public class Point {
         return builder.toString();
     }
 
-    /**
-     * calculate the lineprotocol entry for a single Point.
-     *
-     * Documentation is WIP : https://github.com/influxdb/influxdb/pull/2997
-     *
-     * https://github.com/influxdb/influxdb/blob/master/tsdb/README.md
-     *
-     * @return the String without newLine.
-     */
     public String lineProtocol() {
         final StringBuilder sb = new StringBuilder();
         sb.append(KEY_ESCAPER.escape(this.measurement));

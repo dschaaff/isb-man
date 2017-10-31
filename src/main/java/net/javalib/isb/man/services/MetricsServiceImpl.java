@@ -44,7 +44,7 @@ public class MetricsServiceImpl implements MetricsService {
     @Timed
     public Collection<Metric> update() {
         logger.info("updating metrics...");
-        Collection<ServerInstance> servers = serversService.getServers();
+        Collection<ServerInstance> servers = serversService.update();
         List<Metric> metrics = Collections.synchronizedList(new ArrayList<>());
         ConcurrentUtil.processItems(servers, servers.size(), new ConcurrentUtil.ConcurrentProcessor<ServerInstance>() {
             @Override
@@ -60,6 +60,9 @@ public class MetricsServiceImpl implements MetricsService {
     }
 
     private Collection<Metric> getMetrics(ServerInstance server) {
+        if (!"isb".equals(server.getServerType())) {
+            return null;
+        }
         try {
             Metric[] metrics = restTemplate.getForObject(metricsUrl(server), Metric[].class);
             Collection<Metric> retVal = new ArrayList<>();

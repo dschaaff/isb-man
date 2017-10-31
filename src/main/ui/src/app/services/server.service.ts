@@ -10,9 +10,13 @@ export class ServerService {
   constructor(private http: Http) {
   }
 
+  getConfigURL() : string { return "/api/config"; }
+  getConfig() : Observable<any> {
+    return this.http.get(this.getConfigURL()).map(res => res.json());
+  }
+
   getServersURL() : string { return "/api/servers"; }
   getServers(): Observable<any[]> {
-    console.log("getServers: "+this.getServersURL());
     return this.http.get(this.getServersURL()).map(res => res.json());
   }
 

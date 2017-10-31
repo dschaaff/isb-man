@@ -14,20 +14,26 @@
   <ng-template #rows let-server="row">
     <td><a href="http://{{server.address}}:{{server.managePort}}/manage/ui" target="{{server.hostname}}">{{server.hostname}}</a></td>
     <td>{{server.serviceType}}</td>
-    <td>{{server.version}} [{{server.commitId}}]</td>
+    <td><span *ngIf="server.serverType=='isb'">{{server.version}} [{{server.commitId}}]</span></td>
     <td>{{server.startTime | date:'medium'}}</td>
     <td>
       <a href="#" (click)="copySSH(server)" ngxClipboard [cbContent]="'ssh '+server.address">SSH</a>
-      |
-        JMX
-      |
-      <a href="#" (click)="showTrace(server)">Trace</a>
-      |
-      <a href="#" (click)="showThreads(server)">Threads</a>
-      |
-      <a href="#" (click)="showEnv(server)">Env</a>
-      |
-      <a href="http://{{server.address}}:{{server.port}}/swagger/index.html" target="{{server.hostname}}-swagger">Swagger</a>
+      <span *ngIf="server.serverType=='isb'">
+        <span *ngIf="state.config['hawtio.url'] != null">
+          |
+          <a href="http://hawtio.martech-verve.com/hawtio/jvm/connect?name={{server.hostname}}&host={{server.address}}&port={{server.managePort}}&path=manage/jolokia" target="hawtio-{{server.name}}">
+            JMX
+          </a>
+        </span>
+        |
+        <a href="#" (click)="showTrace(server)">Trace</a>
+        |
+        <a href="#" (click)="showThreads(server)">Threads</a>
+        |
+        <a href="#" (click)="showEnv(server)">Env</a>
+        |
+        <a href="http://{{server.address}}:{{server.port}}/swagger/index.html" target="{{server.hostname}}-swagger">Swagger</a>
+      </span>
     </td>
   </ng-template>
 </dtable>

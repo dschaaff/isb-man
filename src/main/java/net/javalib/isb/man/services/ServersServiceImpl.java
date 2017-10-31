@@ -12,6 +12,7 @@ import net.javalib.isb.man.utils.ConcurrentUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,7 @@ public class ServersServiceImpl implements ServersService {
 
     @Override
     @Timed
+    @CachePut("servers")
     public Collection<ServerInstance> update() {
         List<ServerInstance> instances = Collections.synchronizedList(new ArrayList<ServerInstance>());
         ConcurrentUtil.processItems(serverRegistries, serverRegistries.size(), new ConcurrentUtil.ConcurrentProcessor<ServerInstancesRegistry>() {
