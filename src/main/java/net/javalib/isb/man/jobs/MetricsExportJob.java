@@ -21,7 +21,7 @@ public class MetricsExportJob {
     }
 
 
-    @Scheduled(cron = "*/30 * * * * *")
+    @Scheduled(cron = "0 * * * * *")
     public void run() {
         Collection<Metric> metrics = metricsService.update();
         for (MetricsExporter exporter : exporters) {
