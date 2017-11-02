@@ -1,5 +1,5 @@
 ng build -prod -op ../resources/static/
 ng serve --proxy-config proxy.conf.json
 
-docker build . -t haninaguib/isb-man:alpha-1
-docker push haninaguib/isb-man:alpha-1
+docker build . -t haninaguib/isb-man:alpha-2
+docker push haninaguib/isb-man:alpha-2
