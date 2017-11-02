@@ -46,7 +46,7 @@ public class MetricsServiceImpl implements MetricsService {
     @CachePut("metrics")
     public Collection<Metric> update() {
         logger.info("updating metrics...");
-        Collection<ServerInstance> servers = serversService.update();
+        Collection<ServerInstance> servers = serversService.getServers();
         List<Metric> metrics = Collections.synchronizedList(new ArrayList<>());
         ConcurrentUtil.processItems(servers, servers.size(), new ConcurrentUtil.ConcurrentProcessor<ServerInstance>() {
             @Override
